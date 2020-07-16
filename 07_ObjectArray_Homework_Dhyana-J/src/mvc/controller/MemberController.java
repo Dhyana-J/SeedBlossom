@@ -12,11 +12,11 @@ public class MemberController {
 	private Member[] mem = new Member[SIZE];
 	
 	{
-		mem[0] = new Member("user01","pass01","±èÀ¯½Å",20,'M',"kim12@naver.com");
-		mem[1] = new Member("user02", "pass02", "ÀÌ¼ø½Å", 60, 'M', "lee2@naver.com");
-		mem[2] = new Member("user03", "pass03", "À¯°ü¼ø", 17, 'F', "yo5@hanmail.net");
-		mem[3] = new Member("user04", "pass04", "¿¬°³¼Ò¹®", 57, 'M', "yeon@gmail.com");
-		mem[4] = new Member("user05", "pass05", "½Å»çÀÓ´ç", 45, 'F', "shin@naver.com");
+		mem[0] = new Member("user01","pass01","ê¹€ìœ ì‹ ",20,'M',"kim12@naver.com");
+		mem[1] = new Member("user02", "pass02", "ì´ìˆœì‹ ", 60, 'M', "lee2@naver.com");
+		mem[2] = new Member("user03", "pass03", "ìœ ê´€ìˆœ", 17, 'F', "yo5@hanmail.net");
+		mem[3] = new Member("user04", "pass04", "ì—°ê°œì†Œë¬¸", 57, 'M', "yeon@gmail.com");
+		mem[4] = new Member("user05", "pass05", "ì‹ ì‚¬ì„ë‹¹", 45, 'F', "shin@naver.com");
 		memberCount = 5;
 	}
 	
@@ -42,7 +42,7 @@ public class MemberController {
 	}
 	
 	public void insertMember(Member m) {
-		//°´Ã¼¹è¿­¿¡ °´Ã¼¸¦ Ãß°¡ÇÏ°í memberCount¸¦ 1 Áõ°¡½ÃÅ²´Ù.
+		//ê°ì²´ë°°ì—´ì— ê°ì²´ë¥¼ ì¶”ê°€í•˜ê³  memberCountë¥¼ 1 ì¦ê°€ì‹œí‚¨ë‹¤.
 		mem[memberCount++] = m;
 	}
 	
@@ -91,30 +91,24 @@ public class MemberController {
 	
 	public void deleteMember(String userId) {
 		
-		boolean delete = false; //trueÀÎ °æ¿ì ¹İº¹¹® ºüÁ®³ª°¨
 		
 		for(int i = 0; i<memberCount; i++) {
 			
 			if(userId.equals(mem[i].getUserId())){
 				
-				delete = true;
 				
 				for(int j = i; j<memberCount; j++) {
-					if(j == memberCount-1) { //¸¶Áö¸· ÀÎµ¦½º´Â ºñ¿öÁà¾ßÇÑ´Ù.
+					if(j == memberCount-1) { //ë§ˆì§€ë§‰ ì¸ë±ìŠ¤ëŠ” ë¹„ì›Œì¤˜ì•¼í•œë‹¤.
 						mem[j] = null;
-						//»èÁ¦ÇßÀ¸¹Ç·Î ¸â¹öÄ«¿îÆ®¸¦ 1 °¨¼Ò½ÃÅ²´Ù.
+						//ì‚­ì œí–ˆìœ¼ë¯€ë¡œ ë©¤ë²„ì¹´ìš´íŠ¸ë¥¼ 1 ê°ì†Œì‹œí‚¨ë‹¤.
 						memberCount--;
-						return; // ¸¶Áö¸· ÀÎµ¦½º null Ã¤¿öÁÖ¸é Á¾·áÇØÁÖÀÚ.
+						return; // ë§ˆì§€ë§‰ ì¸ë±ìŠ¤ null ì±„ì›Œì£¼ë©´ ì¢…ë£Œí•´ì£¼ì.
 					}
 					else {
-//						mem[j] = new Member(mem[j+1].getUserId(),mem[j+1].getUserPwd()
-//								,mem[j+1].getName(),mem[j+1].getAge(),
-//								mem[j+1].getGender(),mem[j+1].getEmail());
 						mem[j] = mem[j+1];
 					}
 				}
 				
-				if(delete == true) break;
 				
 			}
 			
