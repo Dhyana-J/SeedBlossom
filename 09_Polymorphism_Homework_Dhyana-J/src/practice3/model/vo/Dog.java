@@ -2,7 +2,7 @@ package practice3.model.vo;
 
 public class Dog extends Animal{
 	
-	private static final String PLACE = "¾Ö°ßÄ«Æä";
+	private static final String PLACE = "ì• ê²¬ì¹´í˜";
 	private int weight;
 	
 	public Dog() {
@@ -14,8 +14,9 @@ public class Dog extends Animal{
 		this.weight = weight;
 	}
 	
-	//finalÀº getter¸¸ ½áÁØ´Ù º¯°æÇÒ ¼ö ¾øÀ¸´Ï
-	public String getPLACE() {
+	//finalì€ getterë§Œ ì¨ì¤€ë‹¤ ë³€ê²½í•  ìˆ˜ ì—†ìœ¼ë‹ˆ
+	//staticì„ ì´ìš©í•´ ê°ì²´ë§ˆë‹¤ ë©”ì†Œë“œê°€ ìƒì„±ë  í•„ìš”ê°€ ì—†ë„ë¡ í•œë‹¤.
+	public static String getPLACE() {
 		return PLACE;
 	}
 	
@@ -29,7 +30,7 @@ public class Dog extends Animal{
 
 	@Override
 	public void speak() {
-		System.out.println(super.toString()+" ¸ö¹«°Ô´Â "+weight+"kg ÀÌ¸Û");
+		System.out.println(super.toString()+" ëª¸ë¬´ê²ŒëŠ” "+weight+"kg ì´ë©");
 	}
 
 }
