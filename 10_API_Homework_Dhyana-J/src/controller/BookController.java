@@ -51,14 +51,14 @@ public class BookController {
 	   //토큰에서 년 월 일 순으로 빠짐. 먼저 넣었던게 먼저 빠진다. (FIFO)
 	   int year = Integer.parseInt(stn.nextToken()); //년
 	   int month = Integer.parseInt(stn.nextToken()); //월
-	   int date = Integer.parseInt(stn.nextToken()); //일
+	   int day = Integer.parseInt(stn.nextToken()); //일    변수명 date -> day로 수정
 	   
-	   Date convertDate = new Date(year-1900,month-1,date);
+	   Date date = new Date(year-1900,month-1,day); //변수명 convertDate -> date로 수정
       
       // ------------------------------------------------------
       // 3. 나머지 전달받은 값들과 위에서 변환작업을 해준 price와 date값을 가지고
       //     매개변수 생성자를 통해 생성한 값 4번 인덱스에 대입
-      list[4] = new Book(newTitle,newAuthor,newPublisher,convertDate,price);
+      list[4] = new Book(newTitle,newAuthor,newPublisher,date,price);
       
    
    }
