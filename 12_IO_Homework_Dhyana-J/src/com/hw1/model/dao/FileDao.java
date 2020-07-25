@@ -1,5 +1,6 @@
 package com.hw1.model.dao;
 
+import java.io.File;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -14,76 +15,86 @@ public class FileDao {
 	Scanner sc = new Scanner(System.in);
 
 	public FileDao() {}
+	
+	public void printFileList() {//ìˆ˜ì •ê°€ëŠ¥í•œ íŒŒì¼ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥í•´ì£¼ëŠ” í•¨ìˆ˜.
+		
+		File dir = new File("C:\\Users\\magho909\\Desktop\\KH\\KH_workspace\\12_IO_Homework_Dhyana-J"); //ì—¬ê¸° ë””ë ‰í† ë¦¬ì—ëŠ” ë³¸ì¸ ì»´í“¨í„° í”„ë¡œì íŠ¸í´ë” ê²½ë¡œ ì…ë ¥!
+		String[] files = dir.list();
 
-	public void fileSave() throws NoSuchElementException{ // ½ºÄ³³Ê ÀÔ·Â°ªÀ¸·Î ctrl+z µé¾î¿Â °æ¿ì ¸ŞÀÎÇÔ¼ö·Î ¿¹¿Ü ´øÁ®¹ö¸®±â
+		for(String e : files) {
+			if(e.contains(".txt"))System.out.println(e); //ë””ë ‰í† ë¦¬ì˜ íŒŒì¼ë“¤ ì¤‘ .txtí™•ì¥ìë§Œ ì¶œë ¥í•´ì¤€ë‹¤.
+		}
+	}
 
-		// StringBuilder »ç¿ë¹ı ¹× »ç¿ëÇÏ´Â ÀÌÀ¯ -> https://hardlearner.tistory.com/288 
+	public void fileSave() throws NoSuchElementException{ // ìŠ¤ìºë„ˆ ì…ë ¥ê°’ìœ¼ë¡œ ctrl+z ë“¤ì–´ì˜¨ ê²½ìš° ë©”ì¸í•¨ìˆ˜ë¡œ ì˜ˆì™¸ ë˜ì ¸ë²„ë¦¬ê¸°
+
+		// StringBuilder ì‚¬ìš©ë²• ë° ì‚¬ìš©í•˜ëŠ” ì´ìœ  -> https://hardlearner.tistory.com/288 
 		StringBuilder sb = new StringBuilder();
 
 		while(true) {
 
-			System.out.println("ÆÄÀÏ¿¡ ÀúÀåÇÒ ³»¿ëÀ» ¹İº¹ÇØ¼­ ÀÔ·ÂÇÏ¼¼¿ä(exitÀÔ·ÂÇÏ¸é ³»¿ë ÀÔ·Â ³¡) : ");
+			System.out.println("íŒŒì¼ì— ì €ì¥í•  ë‚´ìš©ì„ ë°˜ë³µí•´ì„œ ì…ë ¥í•˜ì„¸ìš”(exitì…ë ¥í•˜ë©´ ë‚´ìš© ì…ë ¥ ë) : ");
 			String input = sc.nextLine();
 
-			if(input.toUpperCase().equals("EXIT")) {//ÀÔ·ÂÀ¸·Î exit¶Ç´Â EXIT µé¾î¿À¸é ÀÔ·Â Á¾·á.
-				sb.deleteCharAt(sb.length()-1);//exitÀÔ·ÂÇÑ °æ¿ì ¸¶Áö¸· Çà¿¡ »ğÀÔµÈ °³Çà¹®ÀÚ¸¦ Áö¿î´Ù.
+			if(input.toUpperCase().equals("EXIT")) {//ì…ë ¥ìœ¼ë¡œ exitë˜ëŠ” EXIT ë“¤ì–´ì˜¤ë©´ ì…ë ¥ ì¢…ë£Œ.
+				sb.deleteCharAt(sb.length()-1);//exitì…ë ¥í•œ ê²½ìš° ë§ˆì§€ë§‰ í–‰ì— ì‚½ì…ëœ ê°œí–‰ë¬¸ìë¥¼ ì§€ìš´ë‹¤.
 				break;
 			}else {
-				sb.append(input); //sb¿¡ ÀÔ·Â°ª Ãß°¡ ÈÄ ¹İº¹¹® Àç½ÇÇà!
-				sb.append("\n"); //³»¿ë ÀÔ·Â ÈÄ °³ÇàÇØÁØ´Ù.
+				sb.append(input); //sbì— ì…ë ¥ê°’ ì¶”ê°€ í›„ ë°˜ë³µë¬¸ ì¬ì‹¤í–‰!
+				sb.append("\n"); //ë‚´ìš© ì…ë ¥ í›„ ê°œí–‰í•´ì¤€ë‹¤.
 
 			}
-		}//while³¡ ÀÔ·Â Á¾·á.
+		}//whileë ì…ë ¥ ì¢…ë£Œ.
 
-		System.out.print("ÀúÀåÇÏ½Ã°Ú½À´Ï±î?(y/n) : ");
+		System.out.print("ì €ì¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ?(y/n) : ");
 		char yN = ' ';
 		yN = sc.nextLine().toUpperCase().charAt(0);
 
-		if(yN=='Y') {//ÀÔ·ÂÀ¸·Î y¶Ç´Â Yµé¾î¿À´Â °æ¿ì ÆÄÀÏ¿¡ ÀúÀå ¼öÇà
+		if(yN=='Y') {//ì…ë ¥ìœ¼ë¡œ yë˜ëŠ” Yë“¤ì–´ì˜¤ëŠ” ê²½ìš° íŒŒì¼ì— ì €ì¥ ìˆ˜í–‰
 
-			System.out.print("ÀúÀåÇÒ ÆÄÀÏ¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä : ");
+			System.out.print("ì €ì¥í•  íŒŒì¼ëª…ì„ ì…ë ¥í•˜ì„¸ìš” : ");
 			String fileName = null;
 			fileName = sc.nextLine();
-			fileName = cutTxt(fileName); //È®ÀåÀÚ ÀÔ·Â ½Ã Áö¿öÁØ´Ù.
+			fileName = cutTxt(fileName); //í™•ì¥ì ì…ë ¥ ì‹œ ì§€ì›Œì¤€ë‹¤.
 
-			//			BufferedWriter / FileWriter È°¿ë¹ı
-			//			¾Æ·¡ ¸µÅ© Âü°í.. ¸µÅ© ¿ÖÀÌ·¡?..
+			//			BufferedWriter / FileWriter í™œìš©ë²•
+			//			ì•„ë˜ ë§í¬ ì°¸ê³ .. ë§í¬ ì™œì´ë˜?..
 			//			https://marshallslee.tistory.com/entry/%EC%9E%90%EB%B0%94IO-%ED%85%8D%EC%8A%A4%ED%8A%B8-%ED%8C%8C%EC%9D%BC-%EC%83%9D%EC%84%B1%ED%95%98%EA%B3%A0-%ED%8C%8C%EC%9D%BC%EC%97%90-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%93%B0%EA%B8%B0-2-FileWriter-%EB%B0%8F-BufferedWriter%ED%99%9C%EC%9A%A9
 
-			try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName+".txt"))){//bw.closeÀÚµ¿À¸·Î ÇØÁØ´Ù.
+			try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName+".txt"))){//bw.closeìë™ìœ¼ë¡œ í•´ì¤€ë‹¤.
 
-				bw.write(sb.toString()); //ÀÔ·Â¹Ş¾Ò´ø ³»¿ëÀ» ÆÄÀÏ¿¡ ½áÁÖÀÚ.
-				System.out.println(fileName+".txt ÆÄÀÏ¿¡ ¼º°øÀûÀ¸·Î ÀúÀåÇÏ¿´½À´Ï´Ù.");
+				bw.write(sb.toString()); //ì…ë ¥ë°›ì•˜ë˜ ë‚´ìš©ì„ íŒŒì¼ì— ì¨ì£¼ì.
+				System.out.println(fileName+".txt íŒŒì¼ì— ì„±ê³µì ìœ¼ë¡œ ì €ì¥í•˜ì˜€ìŠµë‹ˆë‹¤.");
 
 			}catch(IOException e) {
 				e.printStackTrace();
 			}
 
 		}
-		else {//ÀÔ·ÂÀ¸·Î n¶Ç´Â Nµé¾î¿À´Â °æ¿ì ¸Ş´º·Î µ¹¾Æ°¡ÀÚ
-			System.out.println("´Ù½Ã ¸Ş´º·Î µ¹¾Æ°©´Ï´Ù.");
-			return; //fileSave() Á¾·á.
+		else {//ì…ë ¥ìœ¼ë¡œ në˜ëŠ” Në“¤ì–´ì˜¤ëŠ” ê²½ìš° ë©”ë‰´ë¡œ ëŒì•„ê°€ì
+			System.out.println("ë‹¤ì‹œ ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
+			return; //fileSave() ì¢…ë£Œ.
 		}
 
 	}
 
-	public String cutTxt(String fileName){//ÆÄÀÏ¸í ÀÔ·Â ½Ã »ç¿ëÀÚ°¡ txtÈ®ÀåÀÚ±îÁö ÀÔ·ÂÇßÀ¸¸é È®ÀåÀÚ´Â Áö¿öÁÖ´Â ÇÔ¼ö
+	public String cutTxt(String fileName){//íŒŒì¼ëª… ì…ë ¥ ì‹œ ì‚¬ìš©ìê°€ txtí™•ì¥ìê¹Œì§€ ì…ë ¥í–ˆìœ¼ë©´ í™•ì¥ìëŠ” ì§€ì›Œì£¼ëŠ” í•¨ìˆ˜
 
 		if(fileName.contains(".txt")) {
-			System.out.println("È®ÀåÀÚ ÀÔ·Â¾ÈÇØµµµÅ¿©");
-			//			return fileName.replaceAll(".txt",""); //¹®Á¦Á¡ : ÆÄÀÏ¸í¿¡ .txt³Ö°í½Í¾îµµ ¸ø³Ö´Â´Ù.
+			System.out.println("í™•ì¥ì ì…ë ¥ì•ˆí•´ë„ë¼ì—¬");
+			//			return fileName.replaceAll(".txt",""); //ë¬¸ì œì  : íŒŒì¼ëª…ì— .txtë„£ê³ ì‹¶ì–´ë„ ëª»ë„£ëŠ”ë‹¤.
 
-			//¹®Á¦ÇØ°áÇÏ±â
-			//È®ÀåÀÚ´Â Ç×»ó ÆÄÀÏ¸í ³¡¿¡ À§Ä¡ÇÏ¹Ç·Î, ÆÄÀÏ¸íÀ» µÚÁıÀ¸¸é ÆÄÀÏ¸í ¹®ÀÚ¿­ 0,1,2,3¹øÂ°¿¡ t x t . ÀÌ·¸°Ô ³× ¹®ÀÚ°¡ ¿À°ÔµÈ´Ù. ÀÌ°É Áö¿ì¸éµÊ.
-			StringBuffer sb = new StringBuffer(fileName); //¹®ÀÚ¿­À» µÚÁı±â À§ÇØ StringBufferÀÌ¿ë.
+			//ë¬¸ì œí•´ê²°í•˜ê¸°
+			//í™•ì¥ìëŠ” í•­ìƒ íŒŒì¼ëª… ëì— ìœ„ì¹˜í•˜ë¯€ë¡œ, íŒŒì¼ëª…ì„ ë’¤ì§‘ìœ¼ë©´ íŒŒì¼ëª… ë¬¸ìì—´ 0,1,2,3ë²ˆì§¸ì— t x t . ì´ë ‡ê²Œ ë„¤ ë¬¸ìê°€ ì˜¤ê²Œëœë‹¤. ì´ê±¸ ì§€ìš°ë©´ë¨.
+			StringBuffer sb = new StringBuffer(fileName); //ë¬¸ìì—´ì„ ë’¤ì§‘ê¸° ìœ„í•´ StringBufferì´ìš©.
 			fileName = sb.reverse().toString();
-			fileName = fileName.replaceFirst("txt.",""); //Ã³À½À¸·Î ³ª¿À´Â txt.ÀÌ ÀÖÀ¸¸é Áö¿öÁØ´Ù.
+			fileName = fileName.replaceFirst("txt.",""); //ì²˜ìŒìœ¼ë¡œ ë‚˜ì˜¤ëŠ” txt.ì´ ìˆìœ¼ë©´ ì§€ì›Œì¤€ë‹¤.
 			sb = new StringBuffer(fileName);
 
-			return sb.reverse().toString(); //´Ù½Ã µÚÁı¾î¼­ ¿ø»óº¹±¸ÇÑ°Å ¸®ÅÏÇØÁÖÀÚ.
+			return sb.reverse().toString(); //ë‹¤ì‹œ ë’¤ì§‘ì–´ì„œ ì›ìƒë³µêµ¬í•œê±° ë¦¬í„´í•´ì£¼ì.
 		}
 		else {
-			System.out.println("ÆÄÀÏ¸íÀ» Àß ÀÔ·ÂÇß±º¿ä");
+			System.out.println("íŒŒì¼ëª…ì„ ì˜ ì…ë ¥í–ˆêµ°ìš”");
 			return fileName;
 		}
 	}
@@ -91,14 +102,14 @@ public class FileDao {
 
 	public void fileOpen() throws NoSuchElementException{
 
-		System.out.print("¿ÀÇÂÇÒ ÆÄÀÏ ÀÌ¸§ : ");
+		System.out.print("ì˜¤í”ˆí•  íŒŒì¼ ì´ë¦„ : ");
 		String fileName = sc.nextLine();
 		fileName = cutTxt(fileName);
 
-		try(BufferedReader br = new BufferedReader(new FileReader(fileName+".txt"))){ //¾Ë¾Æ¼­ stream.close()ÇØÁØ´Ù.
+		try(BufferedReader br = new BufferedReader(new FileReader(fileName+".txt"))){ //ì•Œì•„ì„œ stream.close()í•´ì¤€ë‹¤.
 
-			String line; //ÀĞ¾îµéÀÎ ³»¿ë ÇÑ ÁÙ ÀúÀåÇÒ ¹®ÀÚ¿­
-			while((line = br.readLine())!=null) { //ÀĞ¾îµéÀÎ ³»¿ëÀÌ nullÀÌ ¾Æ´Ï¸é Ãâ·Â. 
+			String line; //ì½ì–´ë“¤ì¸ ë‚´ìš© í•œ ì¤„ ì €ì¥í•  ë¬¸ìì—´
+			while((line = br.readLine())!=null) { //ì½ì–´ë“¤ì¸ ë‚´ìš©ì´ nullì´ ì•„ë‹ˆë©´ ì¶œë ¥. 
 				System.out.println(line);
 			}
 
@@ -110,15 +121,15 @@ public class FileDao {
 
 	public void fileEdit() throws NoSuchElementException{
 
-		System.out.print("¼öÁ¤ÇÒ ÆÄÀÏ ÀÌ¸§ : ");
+		System.out.print("ìˆ˜ì •í•  íŒŒì¼ ì´ë¦„ : ");
 		String fileName = sc.nextLine();
 		fileName = cutTxt(fileName);
 
-		//ÀĞ¾îµéÀÎ ÆÄÀÏ ³»¿ë Ãâ·Â. fileOpen()°ú °ÅÀÇ °°´Ù.
-		try(BufferedReader br = new BufferedReader(new FileReader(fileName+".txt"))){ //¾Ë¾Æ¼­ stream.close()ÇØÁØ´Ù.
+		//ì½ì–´ë“¤ì¸ íŒŒì¼ ë‚´ìš© ì¶œë ¥. fileOpen()ê³¼ ê±°ì˜ ê°™ë‹¤.
+		try(BufferedReader br = new BufferedReader(new FileReader(fileName+".txt"))){ //ì•Œì•„ì„œ stream.close()í•´ì¤€ë‹¤.
 
-			String line; //ÀĞ¾îµéÀÎ ³»¿ë ÇÑ ÁÙ ÀúÀåÇÒ ¹®ÀÚ¿­
-			while((line = br.readLine())!=null) { //ÀĞ¾îµéÀÎ ³»¿ëÀÌ nullÀÌ ¾Æ´Ï¸é Ãâ·Â. 
+			String line; //ì½ì–´ë“¤ì¸ ë‚´ìš© í•œ ì¤„ ì €ì¥í•  ë¬¸ìì—´
+			while((line = br.readLine())!=null) { //ì½ì–´ë“¤ì¸ ë‚´ìš©ì´ nullì´ ì•„ë‹ˆë©´ ì¶œë ¥. 
 				System.out.println(line);
 			}
 
@@ -126,34 +137,34 @@ public class FileDao {
 			e.printStackTrace();
 		}
 
-		//ÆÄÀÏ¿¡ ³»¿ë Ãß°¡. fileSave()¸Ş¼Òµå¿Í °ÅÀÇ °°´Ù.
+		//íŒŒì¼ì— ë‚´ìš© ì¶”ê°€. fileSave()ë©”ì†Œë“œì™€ ê±°ì˜ ê°™ë‹¤.
 		StringBuilder sb = new StringBuilder();
 
 		while(true) {
 
-			System.out.println("ÆÄÀÏ¿¡ Ãß°¡ÇÒ ³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä(exitÀÔ·ÂÇÏ¸é ³»¿ë ÀÔ·Â ³¡) : ");
+			System.out.println("íŒŒì¼ì— ì¶”ê°€í•  ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”(exitì…ë ¥í•˜ë©´ ë‚´ìš© ì…ë ¥ ë) : ");
 			String input = sc.nextLine();
 
-			if(input.toUpperCase().equals("EXIT")) {//ÀÔ·ÂÀ¸·Î exit¶Ç´Â EXIT µé¾î¿À¸é ÀÔ·Â Á¾·á.
-				sb.deleteCharAt(sb.length()-1);//exitÀÔ·ÂÇÑ °æ¿ì ¸¶Áö¸· Çà¿¡ »ğÀÔµÈ °³Çà¹®ÀÚ¸¦ Áö¿î´Ù.
+			if(input.toUpperCase().equals("EXIT")) {//ì…ë ¥ìœ¼ë¡œ exitë˜ëŠ” EXIT ë“¤ì–´ì˜¤ë©´ ì…ë ¥ ì¢…ë£Œ.
+				sb.deleteCharAt(sb.length()-1);//exitì…ë ¥í•œ ê²½ìš° ë§ˆì§€ë§‰ í–‰ì— ì‚½ì…ëœ ê°œí–‰ë¬¸ìë¥¼ ì§€ìš´ë‹¤.
 				break;
 			}else {
-				sb.append("\n"); //¼öÁ¤ÇÒ °ÍÀÌ¹Ç·Î ±âÁ¸ÀÇ ³»¿ë¿¡¼­ °³Çà ÇÏ°í ³»¿ëÀ» ³Ö¾îÁÖÀÚ.
-				sb.append(input); //sb¿¡ ÀÔ·Â°ª Ãß°¡ ÈÄ ¹İº¹¹® Àç½ÇÇà!
+				sb.append("\n"); //ìˆ˜ì •í•  ê²ƒì´ë¯€ë¡œ ê¸°ì¡´ì˜ ë‚´ìš©ì—ì„œ ê°œí–‰ í•˜ê³  ë‚´ìš©ì„ ë„£ì–´ì£¼ì.
+				sb.append(input); //sbì— ì…ë ¥ê°’ ì¶”ê°€ í›„ ë°˜ë³µë¬¸ ì¬ì‹¤í–‰!
 			}
 			
-		}//while³¡ ÀÔ·Â Á¾·á.
+		}//whileë ì…ë ¥ ì¢…ë£Œ.
 
-		System.out.print("º¯°æ ³»¿ëÀ» ÆÄÀÏ¿¡ Ãß°¡ÇÏ½Ã°Ú½À´Ï±î?(y/n) : ");
+		System.out.print("ë³€ê²½ ë‚´ìš©ì„ íŒŒì¼ì— ì¶”ê°€í•˜ì‹œê² ìŠµë‹ˆê¹Œ?(y/n) : ");
 		char yN = ' ';
 		yN = sc.nextLine().toUpperCase().charAt(0);
 
-		if(yN=='Y') {//ÀÔ·ÂÀ¸·Î y¶Ç´Â Yµé¾î¿À´Â °æ¿ì ÆÄÀÏ¿¡ ÀúÀå ¼öÇà
+		if(yN=='Y') {//ì…ë ¥ìœ¼ë¡œ yë˜ëŠ” Yë“¤ì–´ì˜¤ëŠ” ê²½ìš° íŒŒì¼ì— ì €ì¥ ìˆ˜í–‰
 
-			try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName+".txt",true))){//bw.closeÀÚµ¿À¸·Î ÇØÁØ´Ù. true°ªÀ» Ãß°¡ÇØ¼­ ³»¿ë Ãß°¡¸ğµå·Î ¿­ÀÚ.
+			try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName+".txt",true))){//bw.closeìë™ìœ¼ë¡œ í•´ì¤€ë‹¤. trueê°’ì„ ì¶”ê°€í•´ì„œ ë‚´ìš© ì¶”ê°€ëª¨ë“œë¡œ ì—´ì.
 
-				bw.write(sb.toString()); //ÀÔ·Â¹Ş¾Ò´ø ³»¿ëÀ» ÆÄÀÏ¿¡ ½áÁÖÀÚ.
-				System.out.println(fileName+".txt ÆÄÀÏÀÇ ³»¿ëÀÌ º¯°æµÇ¾ú½À´Ï´Ù.");
+				bw.write(sb.toString()); //ì…ë ¥ë°›ì•˜ë˜ ë‚´ìš©ì„ íŒŒì¼ì— ì¨ì£¼ì.
+				System.out.println(fileName+".txt íŒŒì¼ì˜ ë‚´ìš©ì´ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			}catch(FileNotFoundException e) {
 				e.printStackTrace();
@@ -163,9 +174,9 @@ public class FileDao {
 			}
 
 		}
-		else {//ÀÔ·ÂÀ¸·Î n¶Ç´Â Nµé¾î¿À´Â °æ¿ì ¸Ş´º·Î µ¹¾Æ°¡ÀÚ
-			System.out.println("´Ù½Ã ¸Ş´º·Î µ¹¾Æ°©´Ï´Ù.");
-			return; //fileSave() Á¾·á.
+		else {//ì…ë ¥ìœ¼ë¡œ në˜ëŠ” Në“¤ì–´ì˜¤ëŠ” ê²½ìš° ë©”ë‰´ë¡œ ëŒì•„ê°€ì
+			System.out.println("ë‹¤ì‹œ ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
+			return; //fileSave() ì¢…ë£Œ.
 		}
 
 
