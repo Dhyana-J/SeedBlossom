@@ -14,15 +14,16 @@ public class Run {
 		
 		FileDao fd = new FileDao();
 		
-		//¹İº¹¹®À» ÅëÇÑ ¸Ş´º ½ÇÇà
+		//ë°˜ë³µë¬¸ì„ í†µí•œ ë©”ë‰´ ì‹¤í–‰
 		while(true) {
 			System.out.println();
 			System.out.println("***** MyNote *****");
-			System.out.println("1. ³ëÆ® »õ·Î ¸¸µé±â");
-			System.out.println("2. ³ëÆ® ¿­±â");
-			System.out.println("3. ³ëÆ® ¿­¾î¼­ ¼öÁ¤ÇÏ±â");
-			System.out.println("4. ³¡³»±â");
-			System.out.print("¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+			System.out.println("1. ë…¸íŠ¸ ìƒˆë¡œ ë§Œë“¤ê¸°");
+			System.out.println("2. ë…¸íŠ¸ ì—´ê¸°");
+			System.out.println("3. ë…¸íŠ¸ ì—´ì–´ì„œ ìˆ˜ì •í•˜ê¸°");
+			System.out.println("4. ë…¸íŠ¸ ëª©ë¡ ë³´ê¸°"); //ë…¸íŠ¸ ëª©ë¡ ë³´ê¸° ì¶”ê°€ë¨
+			System.out.println("5. ëë‚´ê¸°");
+			System.out.print("ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 			
 			try {
 				String input = sc.nextLine();
@@ -31,18 +32,19 @@ public class Run {
 				case "1": fd.fileSave();break; 
 				case "2": fd.fileOpen();break;
 				case "3": fd.fileEdit();break;
-				case "4": System.out.println("ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù."); return;
-				default: System.out.println("Àß¸ø ´©¸£¼Ì½À´Ï´Ù. 1~4 »çÀÌ ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+				case "4": fd.printFileList(); break; // ë…¸íŠ¸ ëª©ë¡ ë³´ê¸°
+				case "5": System.out.println("í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤."); return;
+				default: System.out.println("ì˜ëª» ëˆ„ë¥´ì…¨ìŠµë‹ˆë‹¤. 1~4 ì‚¬ì´ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”");
 				}
 			}
-			catch(NoSuchElementException e) { //È¤½Ã³ª ÀÔ·Â°ªÀÌ ÀÌ»óÇÏ¸é ¿¹¿ÜÃ³¸®. ÀÔ·Â°ªÀ¸·Î ctrl+z¸¦ ´­·¶´Ùµç°¡?
-				System.out.println("\n°­Á¦Á¾·á¸¦ ÀÔ·ÂÇß½À´Ï´Ù. ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù.");
-				System.out.println("¿¹¿Ü ³»¿ë : ");
+			catch(NoSuchElementException e) { //í˜¹ì‹œë‚˜ ì…ë ¥ê°’ì´ ì´ìƒí•˜ë©´ ì˜ˆì™¸ì²˜ë¦¬. ì…ë ¥ê°’ìœ¼ë¡œ ctrl+zë¥¼ ëˆŒë €ë‹¤ë“ ê°€?
+				System.out.println("\nê°•ì œì¢…ë£Œë¥¼ ì…ë ¥í–ˆìŠµë‹ˆë‹¤. í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.");
+				System.out.println("ì˜ˆì™¸ ë‚´ìš© : ");
 				e.printStackTrace();
-				System.exit(0);//ÇÁ·Î±×·¥À» ¹Ù·Î Á¾·á½ÃÄÑ¹ö¸°´Ù.
-//				exit »ç¿ë¹ı Âü°í : https://coding-factory.tistory.com/526
-//				return; //ÇÔ¼ö(¸Ş¼Òµå)¸¦ Á¾·á½ÃÅ²´Ù.
-//				exit°ú returnÀÇ Â÷ÀÌ? mainÇÔ¼ö°¡ Á¾·áµÈ ÀÌÈÄÀÇ ÀıÂ÷°¡ ¾î¶»°ÔµÉ±î? 
+				System.exit(0);//í”„ë¡œê·¸ë¨ì„ ë°”ë¡œ ì¢…ë£Œì‹œì¼œë²„ë¦°ë‹¤.
+//				exit ì‚¬ìš©ë²• ì°¸ê³  : https://coding-factory.tistory.com/526
+//				return; //í•¨ìˆ˜(ë©”ì†Œë“œ)ë¥¼ ì¢…ë£Œì‹œí‚¨ë‹¤.
+//				exitê³¼ returnì˜ ì°¨ì´? mainí•¨ìˆ˜ê°€ ì¢…ë£Œëœ ì´í›„ì˜ ì ˆì°¨ê°€ ì–´ë–»ê²Œë ê¹Œ? 
 			}
 			
 		}
