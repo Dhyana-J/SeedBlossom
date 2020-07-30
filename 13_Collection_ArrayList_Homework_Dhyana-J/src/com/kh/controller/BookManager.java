@@ -15,23 +15,23 @@ public class BookManager {
 		int lastNo = 0;
 		
 		try {
-		lastNo = bookList.get(bookList.size()-1).getbNo()+1; //¸¶Áö¸· µµ¼­¹øÈ£ +1
+		lastNo = bookList.get(bookList.size()-1).getbNo()+1; //ë§ˆì§€ë§‰ ë„ì„œë²ˆí˜¸ +1
 		}catch(ArrayIndexOutOfBoundsException e) {
 			lastNo = 1;
 		}
 
-		book.setbNo(lastNo); //µµ¼­¹øÈ£¼³Á¤
+		book.setbNo(lastNo); //ë„ì„œë²ˆí˜¸ì„¤ì •
 		
 		bookList.add(book);
 	}
 	
 	public int deleteBook(int bNo) {
 
-		int complete = 0; //»èÁ¦¿©ºÎ. 1ÀÌ¸é »èÁ¦¿Ï·á.
+		int complete = 0; //ì‚­ì œì—¬ë¶€. 1ì´ë©´ ì‚­ì œì™„ë£Œ.
 		for(int i = 0; i<bookList.size(); i++) {
 			if(bookList.get(i).getbNo()==bNo) {
 				bookList.remove(i);
-				i--;//Áö¿ì¸é ¸®½ºÆ® »çÀÌÁî°¡ ÁÙ¾îµç´Ù. ÀÎµ¦½º¸¦ °Ç³Ê¶ÙÁö ¾Êµµ·Ï i¸¦ ÁÙ¿©ÁÖÀÚ.
+				i--;//ì§€ìš°ë©´ ë¦¬ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆê°€ ì¤„ì–´ë“ ë‹¤. ì¸ë±ìŠ¤ë¥¼ ê±´ë„ˆë›°ì§€ ì•Šë„ë¡ ië¥¼ ì¤„ì—¬ì£¼ì.
 				complete = 1;
 			}
 		}
@@ -42,10 +42,10 @@ public class BookManager {
 	}
 	
 	public ArrayList<Book> searchBook(String title) {
-		ArrayList<Book> searchList = new ArrayList<Book>(); //°Ë»ö°á°ú º¸°üÇÒ ¸®½ºÆ®
+		ArrayList<Book> searchList = new ArrayList<Book>(); //ê²€ìƒ‰ê²°ê³¼ ë³´ê´€í•  ë¦¬ìŠ¤íŠ¸
 		for(Book e : bookList) {
-			if(e.getTitle().equals(title)) {
-				searchList.add(e); //Àü´Ş¹ŞÀº Á¦¸ñÀ»Æ÷ÇÔÇÑ µµ¼­¸¦ searchList¿¡ Ãß°¡
+			if(e.getTitle().contains(title)) { //.equals->.containsë¡œ ë³€ê²½í•¨.
+				searchList.add(e); //ì „ë‹¬ë°›ì€ ì œëª©ì„í¬í•¨í•œ ë„ì„œë¥¼ searchListì— ì¶”ê°€
 			}
 		}
 		return searchList;
