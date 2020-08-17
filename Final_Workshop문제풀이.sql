@@ -1,76 +1,76 @@
 /*
-½Ç½À¹®Á¦Ç®ÀÌ
+ì‹¤ìŠµë¬¸ì œí’€ì´
 */
 
---1. µµ¼­¸íÀÌ 25ÀÚ ÀÌ»óÀÎ Ã¥ ¹øÈ£¿Í µµ¼­¸íÀ» È­¸é¿¡ Ãâ·ÂÇÏ´Â SQL¹® ÀÛ¼º
+--1. ë„ì„œëª…ì´ 25ìž ì´ìƒì¸ ì±… ë²ˆí˜¸ì™€ ë„ì„œëª…ì„ í™”ë©´ì— ì¶œë ¥í•˜ëŠ” SQLë¬¸ ìž‘ì„±
 SELECT BOOK_NO,
         BOOK_NM
 FROM TB_BOOK 
 WHERE LENGTH(BOOK_NM)>=25;
 
 
---2. ÈÞ´ëÆù ¹øÈ£°¡ 019·Î ½ÃÀÛÇÏ´Â ±è¾¾ ¼ºÀ» °¡Áø ÀÛ°¡¸¦ ÀÌ¸§¼øÀ¸·Î Á¤·ÄÇßÀ» ¶§, °¡Àå ¸ÕÀú Ç¥½ÃµÇ´Â
---ÀÛ°¡ ÀÌ¸§°ú »ç¹«½Ç ÀüÈ­¹øÈ£, ÁýÀüÈ­¹øÈ£, ÈÞ´ëÆùÀüÈ­¹øÈ£¸¦ Ç¥½ÃÇÏ´Â SQL±¸¹® ÀÛ¼º
+--2. íœ´ëŒ€í° ë²ˆí˜¸ê°€ 019ë¡œ ì‹œìž‘í•˜ëŠ” ê¹€ì”¨ ì„±ì„ ê°€ì§„ ìž‘ê°€ë¥¼ ì´ë¦„ìˆœìœ¼ë¡œ ì •ë ¬í–ˆì„ ë•Œ, ê°€ìž¥ ë¨¼ì € í‘œì‹œë˜ëŠ”
+--ìž‘ê°€ ì´ë¦„ê³¼ ì‚¬ë¬´ì‹¤ ì „í™”ë²ˆí˜¸, ì§‘ì „í™”ë²ˆí˜¸, íœ´ëŒ€í°ì „í™”ë²ˆí˜¸ë¥¼ í‘œì‹œí•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±
 SELECT * 
 FROM (SELECT WRITER_NM, OFFICE_TELNO, HOME_TELNO, MOBILE_NO
         FROM TB_WRITER
         WHERE MOBILE_NO LIKE('019%') AND
-            WRITER_NM LIKE('±è%')
+            WRITER_NM LIKE('ê¹€%')
         ORDER BY WRITER_NM)
 WHERE ROWNUM = 1;
 
---3. ÀúÀÛ ÇüÅÂ°¡ "¿Å±è"¿¡ ÇØ´çÇÏ´Â ÀÛ°¡µéÀÌ ÃÑ ¸î ¸íÀÎÁö °è»êÇÏ´Â SQL±¸¹® ÀÛ¼ºÇÏ½Ã¿À.
---(°á°ú Çì´õ´Â "ÀÛ°¡(¸í)"À¸·Î Ç¥½ÃµÇµµ·Ï ÇÒ °Í
-SELECT COUNT(COMPOSE_TYPE) AS "ÀÛ°¡(¸í)"
+--3. ì €ìž‘ í˜•íƒœê°€ "ì˜®ê¹€"ì— í•´ë‹¹í•˜ëŠ” ìž‘ê°€ë“¤ì´ ì´ ëª‡ ëª…ì¸ì§€ ê³„ì‚°í•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±í•˜ì‹œì˜¤.
+--(ê²°ê³¼ í—¤ë”ëŠ” "ìž‘ê°€(ëª…)"ìœ¼ë¡œ í‘œì‹œë˜ë„ë¡ í•  ê²ƒ
+SELECT COUNT(COMPOSE_TYPE) AS "ìž‘ê°€(ëª…)"
 FROM TB_BOOK_AUTHOR
-WHERE COMPOSE_TYPE = '¿Å±è';
+WHERE COMPOSE_TYPE = 'ì˜®ê¹€';
 
---4. 300ÆäÀÌÁö ÀÌ»ó µî·ÏµÈ µµ¼­ÀÇ ÀúÀÛ ÇüÅÂ ¹× µî·ÏµÈ µµ¼­ ¼ö·®À» Ç¥½ÃÇÏ´Â SQL±¸¹®À» ÀÛ¼ºÇÏ½Ã¿À.
---(ÀúÀÛ ÇüÅÂ°¡ µî·ÏµÇÁö ¾ÊÀº °æ¿ì´Â Á¦¿ÜÇÒ °Í)
+--4. 300íŽ˜ì´ì§€ ì´ìƒ ë“±ë¡ëœ ë„ì„œì˜ ì €ìž‘ í˜•íƒœ ë° ë“±ë¡ëœ ë„ì„œ ìˆ˜ëŸ‰ì„ í‘œì‹œí•˜ëŠ” SQLêµ¬ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+--(ì €ìž‘ í˜•íƒœê°€ ë“±ë¡ë˜ì§€ ì•Šì€ ê²½ìš°ëŠ” ì œì™¸í•  ê²ƒ)
 SELECT BOOK_NM,COMPOSE_TYPE, STOCK_QTY
 FROM TB_BOOK_AUTHOR
 JOIN TB_BOOK USING(BOOK_NO)
 WHERE COMPOSE_TYPE IS NOT NULL AND
     PAGE>=300;
 
---5. °¡Àå ÃÖ±Ù¿¡ ¹ß°£µÈ ÃÖ½ÅÀÛ ÀÌ¸§°ú ¹ßÇàÀÏÀÚ, ÃâÆÇ»ç ÀÌ¸§À» Ç¥½ÃÇÏ´Â SQL±¸¹® ÀÛ¼º
+--5. ê°€ìž¥ ìµœê·¼ì— ë°œê°„ëœ ìµœì‹ ìž‘ ì´ë¦„ê³¼ ë°œí–‰ì¼ìž, ì¶œíŒì‚¬ ì´ë¦„ì„ í‘œì‹œí•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±
 SELECT * 
 FROM(SELECT BOOK_NM, ISSUE_DATE, PUBLISHER_NM
     FROM TB_BOOK
     ORDER BY ISSUE_DATE DESC)
 WHERE ROWNUM = 1;
 
---6. °¡Àå ¸¹Àº Ã¥À» ¾´ ÀÛ°¡ 3¸íÀÇ ÀÌ¸§°ú ¼ö·®À» Ç¥½ÃÇÏµÇ, ¸¹ÀÌ ¾´ ¼ø¼­´ë·Î Ç¥½ÃÇÏ´Â SQL±¸¹® ÀÛ¼º
---´Ü, µ¿¸íÀÌÀÎ ÀÛ°¡´Â ¾ø´Ù°í °¡Á¤. (°á°ú Çì´õ´Â ÀÛ°¡ ÀÌ¸§, ±Ç ¼ö·Î Ç¥½ÃµÇµµ·Ï ÇÏÀÚ)
-SELECT "ÀÛ°¡ ÀÌ¸§", "±Ç ¼ö"
+--6. ê°€ìž¥ ë§Žì€ ì±…ì„ ì“´ ìž‘ê°€ 3ëª…ì˜ ì´ë¦„ê³¼ ìˆ˜ëŸ‰ì„ í‘œì‹œí•˜ë˜, ë§Žì´ ì“´ ìˆœì„œëŒ€ë¡œ í‘œì‹œí•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±
+--ë‹¨, ë™ëª…ì´ì¸ ìž‘ê°€ëŠ” ì—†ë‹¤ê³  ê°€ì •. (ê²°ê³¼ í—¤ë”ëŠ” ìž‘ê°€ ì´ë¦„, ê¶Œ ìˆ˜ë¡œ í‘œì‹œë˜ë„ë¡ í•˜ìž)
+SELECT "ìž‘ê°€ ì´ë¦„", "ê¶Œ ìˆ˜"
 FROM
-(SELECT WRITER_NM "ÀÛ°¡ ÀÌ¸§",
-        COUNT(WRITER_NO) "±Ç ¼ö",
-        DENSE_RANK() OVER(ORDER BY COUNT(WRITER_NO) DESC) AS "¼øÀ§"
+(SELECT WRITER_NM "ìž‘ê°€ ì´ë¦„",
+        COUNT(WRITER_NO) "ê¶Œ ìˆ˜",
+        DENSE_RANK() OVER(ORDER BY COUNT(WRITER_NO) DESC) AS "ìˆœìœ„"
 FROM TB_WRITER
 JOIN TB_BOOK_AUTHOR USING(WRITER_NO)
 GROUP BY WRITER_NM,WRITER_NO
 ORDER BY COUNT(WRITER_NO) DESC)
-WHERE ¼øÀ§ <=3;
+WHERE ìˆœìœ„ <=3;
 
---ROWNUM»ç¿ë
+--ROWNUMì‚¬ìš©
 SELECT *
 FROM
-    (SELECT WRITER_NM "ÀÛ°¡ ÀÌ¸§",
-        COUNT(WRITER_NO) "±Ç ¼ö"
+    (SELECT WRITER_NM "ìž‘ê°€ ì´ë¦„",
+        COUNT(WRITER_NO) "ê¶Œ ìˆ˜"
         FROM TB_WRITER
         JOIN TB_BOOK_AUTHOR USING(WRITER_NO)
         GROUP BY WRITER_NM,WRITER_NO
         ORDER BY COUNT(WRITER_NO) DESC)
 WHERE ROWNUM IN (1,2,3);
 
---7. ÀÛ°¡ Á¤º¸ Å×ÀÌºíÀÇ ¸ðµç µî·ÏÀÏÀÚ Ç×¸ñÀÌ ´©¶ôµÇ¾î ÀÖ´Â °ÍÀ» ¹ß°ßÇß´Ù. ´©¶ôµÈ µî·ÏÀÏÀÚ °ªÀ»
---°¢ ÀÛ°¡ÀÇ ÃÖÃÊ ÃâÆÇµµ¼­ÀÇ ¹ßÇàÀÏ°ú µ¿ÀÏÇÑ ³¯Â¥·Î º¯°æ½ÃÄÑ¶ó. COMMITÃ³¸®ÇØ¶ó.
---ÀÛ°¡ÀÇ ÃÖÃÊ ÃâÆÇµµ¼­ ¹ßÇàÀÏ
--- ÀÌ Å×ÀÌºíÀÇ WRITER_NO¶û ±× Å×ÀÌºíÀÇ WRITER_NO°¡ °°Àº °Í¿¡ ÇÑÇØ ISSUE_DATEº¯°æ½ÃÅ°ÀÚ
--- ±×·ìº° ·©Å©¸Å°Ü¾ßÇÒµí
+--7. ìž‘ê°€ ì •ë³´ í…Œì´ë¸”ì˜ ëª¨ë“  ë“±ë¡ì¼ìž í•­ëª©ì´ ëˆ„ë½ë˜ì–´ ìžˆëŠ” ê²ƒì„ ë°œê²¬í–ˆë‹¤. ëˆ„ë½ëœ ë“±ë¡ì¼ìž ê°’ì„
+--ê° ìž‘ê°€ì˜ ìµœì´ˆ ì¶œíŒë„ì„œì˜ ë°œí–‰ì¼ê³¼ ë™ì¼í•œ ë‚ ì§œë¡œ ë³€ê²½ì‹œì¼œë¼. COMMITì²˜ë¦¬í•´ë¼.
+--ìž‘ê°€ì˜ ìµœì´ˆ ì¶œíŒë„ì„œ ë°œí–‰ì¼
+-- ì´ í…Œì´ë¸”ì˜ WRITER_NOëž‘ ê·¸ í…Œì´ë¸”ì˜ WRITER_NOê°€ ê°™ì€ ê²ƒì— í•œí•´ ISSUE_DATEë³€ê²½ì‹œí‚¤ìž
+-- ê·¸ë£¹ë³„ ëž­í¬ë§¤ê²¨ì•¼í• ë“¯
 
---ÃÖÃÊ ÃâÆÇµµ¼­ ¹ßÇàÀÏ Å×ÀÌºíÈ­
+--ìµœì´ˆ ì¶œíŒë„ì„œ ë°œí–‰ì¼ í…Œì´ë¸”í™”
 CREATE TABLE TB_REGIST_DATE AS
 WITH RESULT AS (SELECT WRITER_NM,
         ISSUE_DATE,
@@ -85,13 +85,13 @@ SELECT WRITER_NM, ISSUE_DATE
 FROM RESULT
 WHERE RANK = 1;
 
---µî·ÏÀÏÀÚ Ç×¸ñ¿¡ °¢ ÀÛ°¡ÀÇ ÃÖÃÊ ÃâÆÇµµ¼­ ¹ßÇàÀÏÀ» º´ÇÕ½ÃÅ°ÀÚ.
+--ë“±ë¡ì¼ìž í•­ëª©ì— ê° ìž‘ê°€ì˜ ìµœì´ˆ ì¶œíŒë„ì„œ ë°œí–‰ì¼ì„ ë³‘í•©ì‹œí‚¤ìž.
 MERGE INTO TB_WRITER USING TB_REGIST_DATE ON(TB_WRITER.WRITER_NM=TB_REGIST_DATE.WRITER_NM)
 WHEN MATCHED THEN
 UPDATE SET TB_WRITER.REGIST_DATE = TB_REGIST_DATE.ISSUE_DATE;
 
 
---8. TB_BOOK_TRANSLATOR Å×ÀÌºí »ý¼º
+--8. TB_BOOK_TRANSLATOR í…Œì´ë¸” ìƒì„±
 CREATE TABLE TB_BOOK_TRANSLATOR(
     BOOK_NO VARCHAR2(10) NOT NULL,
     WRITER_NO VARCHAR2(10) NOT NULL,
@@ -101,20 +101,20 @@ CREATE TABLE TB_BOOK_TRANSLATOR(
     CONSTRAINT PK_BOOK_TRANSLATOR PRIMARY KEY(BOOK_NO,WRITER_NO)
 );
 
-COMMENT ON COLUMN TB_BOOK_TRANSLATOR.BOOK_NO IS 'µµ¼­ ¹øÈ£';
-COMMENT ON COLUMN TB_BOOK_TRANSLATOR.WRITER_NO IS 'ÀÛ°¡ ¹øÈ£';
-COMMENT ON COLUMN TB_BOOK_TRANSLATOR.TRANS_LANG IS '¹ø¿ª ¾ð¾î';
+COMMENT ON COLUMN TB_BOOK_TRANSLATOR.BOOK_NO IS 'ë„ì„œ ë²ˆí˜¸';
+COMMENT ON COLUMN TB_BOOK_TRANSLATOR.WRITER_NO IS 'ìž‘ê°€ ë²ˆí˜¸';
+COMMENT ON COLUMN TB_BOOK_TRANSLATOR.TRANS_LANG IS 'ë²ˆì—­ ì–¸ì–´';
 
 INSERT INTO TB_BOOK_TRANSLATOR VALUES(1991060502,2,'ENG');
 
---9. µµ¼­ ÀúÀÛ ÇüÅÂ(COMPOSE_TYPE)ÀÌ '¿Å±è','¿ªÁÖ','Æí¿ª','°ø¿ª'¿¡ ÇØ´çÇÏ´Â µ¥ÀÌÅÍ´Â
---µµ¼­ ÀúÀÚ Á¤º¸ Å×ÀÌºí¿¡¼­ µµ¼­ ¿ªÀÚ Á¤º¸ Å×ÀÌºí(TB_BOOK_TRANSLATOR)·Î ¿Å±â´Â SQLÀÛ¼º
---´Ü, TRANS_LANG ÄÃ·³Àº NULL »óÅÂ·Î µÐ´Ù. ÀÌµ¿µÈ µ¥ÀÌÅÍ´Â ´õÀÌ»ó TB_BOOK_AUTHOR¿¡ ¾È³²µµ·ÏÇÏÀÚ.
+--9. ë„ì„œ ì €ìž‘ í˜•íƒœ(COMPOSE_TYPE)ì´ 'ì˜®ê¹€','ì—­ì£¼','íŽ¸ì—­','ê³µì—­'ì— í•´ë‹¹í•˜ëŠ” ë°ì´í„°ëŠ”
+--ë„ì„œ ì €ìž ì •ë³´ í…Œì´ë¸”ì—ì„œ ë„ì„œ ì—­ìž ì •ë³´ í…Œì´ë¸”(TB_BOOK_TRANSLATOR)ë¡œ ì˜®ê¸°ëŠ” SQLìž‘ì„±
+--ë‹¨, TRANS_LANG ì»¬ëŸ¼ì€ NULL ìƒíƒœë¡œ ë‘”ë‹¤. ì´ë™ëœ ë°ì´í„°ëŠ” ë”ì´ìƒ TB_BOOK_AUTHORì— ì•ˆë‚¨ë„ë¡í•˜ìž.
 
 CREATE TABLE DATACOPY AS
 (SELECT BOOK_NO,WRITER_NO
 FROM TB_BOOK_AUTHOR
-WHERE COMPOSE_TYPE IN('¿Å±è','¿ªÁÖ','Æí¿ª','°ø¿ª'));
+WHERE COMPOSE_TYPE IN('ì˜®ê¹€','ì—­ì£¼','íŽ¸ì—­','ê³µì—­'));
 
 MERGE INTO TB_BOOK_TRANSLATOR 
 USING DATACOPY
@@ -127,19 +127,19 @@ INSERT VALUES(
 
 DROP TABLE DATACOPY;
 DELETE FROM TB_BOOK_AUTHOR
-WHERE COMPOSE_TYPE IN('¿Å±è','¿ªÁÖ','Æí¿ª','°ø¿ª');
+WHERE COMPOSE_TYPE IN('ì˜®ê¹€','ì—­ì£¼','íŽ¸ì—­','ê³µì—­');
 
 COMMIT;
 
---10.2007³âµµ¿¡ ÃâÆÇµÈ ¹ø¿ª¼­ ÀÌ¸§°ú ¿ªÀÚ¸¦ Ç¥½ÃÇÏ´Â SQL±¸¹® ÀÛ¼º
+--10.2007ë…„ë„ì— ì¶œíŒëœ ë²ˆì—­ì„œ ì´ë¦„ê³¼ ì—­ìžë¥¼ í‘œì‹œí•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±
 SELECT BOOK_NM, WRITER_NM
 FROM TB_BOOK_TRANSLATOR
 JOIN TB_BOOK USING(BOOK_NO)
 JOIN TB_WRITER USING(WRITER_NO)
 WHERE ISSUE_DATE LIKE('07/%');
 
---11. 10¹ø °á°ú¸¦ È°¿ëÇØ ´ë»ó ¹ø¿ª¼­µéÀÇ ÃâÆÇÀÏÀ» º¯°æÇÒ ¼ö ¾øµµ·Ï ÇÏ´Â ºä¸¦ »ý¼ºÇÏ´Â SQL±¸¹® ÀÛ¼º
---ºä ÀÌ¸§Àº VW_BOOK_TRANSLATOR·Î ÇÏ°í µµ¼­¸í, ¹ø¿ªÀÚ, ÃâÆÇÀÏÀÌ Ç¥½ÃµÇµµ·Ï ÇÏÀÚ.
+--11. 10ë²ˆ ê²°ê³¼ë¥¼ í™œìš©í•´ ëŒ€ìƒ ë²ˆì—­ì„œë“¤ì˜ ì¶œíŒì¼ì„ ë³€ê²½í•  ìˆ˜ ì—†ë„ë¡ í•˜ëŠ” ë·°ë¥¼ ìƒì„±í•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±
+--ë·° ì´ë¦„ì€ VW_BOOK_TRANSLATORë¡œ í•˜ê³  ë„ì„œëª…, ë²ˆì—­ìž, ì¶œíŒì¼ì´ í‘œì‹œë˜ë„ë¡ í•˜ìž.
 CREATE OR REPLACE VIEW VW_BOOK_TRANSLATOR
 AS SELECT BOOK_NO, WRITER_NM, ISSUE_DATE
 FROM TB_BOOK_TRANSLATOR
@@ -147,63 +147,63 @@ JOIN TB_BOOK USING(BOOK_NO)
 JOIN TB_WRITER USING(WRITER_NO)
 WHERE ISSUE_DATE IS NOT NULL WITH CHECK OPTION;
 
---12. »õ·Î¿î ÃâÆÇ»ç¿Í °Å·¡ °è¾à ¸ÎÀ½.±¸¹® ÀÛ¼º
-INSERT INTO TB_PUBLISHER VALUES('Ãá ÃâÆÇ»ç','02-6710-3737',DEFAULT);
+--12. ìƒˆë¡œìš´ ì¶œíŒì‚¬ì™€ ê±°ëž˜ ê³„ì•½ ë§ºìŒ.êµ¬ë¬¸ ìž‘ì„±
+INSERT INTO TB_PUBLISHER VALUES('ì¶˜ ì¶œíŒì‚¬','02-6710-3737',DEFAULT);
 
---13.µ¿¸íÀÌÀÎ ÀÛ°¡ÀÇ ÀÌ¸§À» Ã£À¸·Á°í ÇÑ´Ù. ÀÌ¸§°ú µ¿¸íÀÌÀÎ ¼ýÀÚ¸¦ Ç¥½ÃÇÏ´Â  SQL±¸¹® ÀÛ¼º.
+--13.ë™ëª…ì´ì¸ ìž‘ê°€ì˜ ì´ë¦„ì„ ì°¾ìœ¼ë ¤ê³  í•œë‹¤. ì´ë¦„ê³¼ ë™ëª…ì´ì¸ ìˆ«ìžë¥¼ í‘œì‹œí•˜ëŠ”  SQLêµ¬ë¬¸ ìž‘ì„±.
 SELECT WRITER_NM,COUNT(WRITER_NM)
 FROM TB_WRITER
 GROUP BY WRITER_NM
 HAVING COUNT(WRITER_NM)>1;
 
---14.µµ¼­ÀÇ ÀúÀÚ Á¤º¸ Áß ÀúÀÛ ÇüÅÂ(COMPOSE_TYPE)ÀÌ ´©¶ôµÈ µ¥ÀÌÅÍµéÀÌ ÀûÁö ¾Ê°Ô Á¸ÀçÇÔ. ÇØ´ç ÄÃ·³ÀÌ NULLÀÎ °æ¿ì
--- 'ÁöÀ½'À¸·Î º¯°æÇÏ´Â SQL±¸¹® ÀÛ¼ºÇÏÀÚ
+--14.ë„ì„œì˜ ì €ìž ì •ë³´ ì¤‘ ì €ìž‘ í˜•íƒœ(COMPOSE_TYPE)ì´ ëˆ„ë½ëœ ë°ì´í„°ë“¤ì´ ì ì§€ ì•Šê²Œ ì¡´ìž¬í•¨. í•´ë‹¹ ì»¬ëŸ¼ì´ NULLì¸ ê²½ìš°
+-- 'ì§€ìŒ'ìœ¼ë¡œ ë³€ê²½í•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±í•˜ìž
 UPDATE TB_BOOK_AUTHOR
-SET COMPOSE_TYPE = 'ÁöÀ½'
+SET COMPOSE_TYPE = 'ì§€ìŒ'
 WHERE COMPOSE_TYPE IS NULL;
 
---15. ¼­¿ïÁö¿ª ÀÛ°¡ ¸ðÀÓÀ» °³ÃÖÇÏ·Á°íÇÑ´Ù. »ç¹«½ÇÀÌ ¼­¿ïÀÌ°í, »ç¹«½Ç ÀüÈ­ ¹øÈ£ ±¹¹øÀÌ 3ÀÚ¸®ÀÎ ÀÛ°¡ÀÇ ÀÌ¸§°ú »ç¹«½Ç ÀüÈ­ ¹øÈ£¸¦ Ç¥½ÃÇÏ´Â SQL±¸¹® ÀÛ¼º
+--15. ì„œìš¸ì§€ì—­ ìž‘ê°€ ëª¨ìž„ì„ ê°œìµœí•˜ë ¤ê³ í•œë‹¤. ì‚¬ë¬´ì‹¤ì´ ì„œìš¸ì´ê³ , ì‚¬ë¬´ì‹¤ ì „í™” ë²ˆí˜¸ êµ­ë²ˆì´ 3ìžë¦¬ì¸ ìž‘ê°€ì˜ ì´ë¦„ê³¼ ì‚¬ë¬´ì‹¤ ì „í™” ë²ˆí˜¸ë¥¼ í‘œì‹œí•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±
 SELECT WRITER_NM, OFFICE_TELNO
 FROM TB_WRITER
 WHERE OFFICE_TELNO LIKE('02%')AND
         OFFICE_TELNO LIKE('02-___-%');
 
---16. 2006³â 1¿ù ±âÁØÀ¸·Î µî·ÏµÈ Áö 31³â ÀÌ»ó µÈ ÀÛ°¡ ÀÌ¸§À» ÀÌ¸§¼øÀ¸·Î Ç¥½ÃÇÏ´Â SQL±¸¹® ÀÛ¼º
+--16. 2006ë…„ 1ì›” ê¸°ì¤€ìœ¼ë¡œ ë“±ë¡ëœ ì§€ 31ë…„ ì´ìƒ ëœ ìž‘ê°€ ì´ë¦„ì„ ì´ë¦„ìˆœìœ¼ë¡œ í‘œì‹œí•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±
 SELECT WRITER_NM
 FROM TB_WRITER
-WHERE (TO_DATE(20060101,'YYYYMMDD')-REGIST_DATE)>=11315 --11315ÀÏ = 31³â
+WHERE (TO_DATE(20060101,'YYYYMMDD')-REGIST_DATE)>=11315 --11315ì¼ = 31ë…„
 ORDER BY WRITER_NM;
 
---17. ¿äÁòµé¾î ´Ù½Ã±Ý ÀÎ±â¸¦ ¾ò°í ÀÖ´Â 'È²±Ý°¡Áö'ÃâÆÇ»ç¸¦ À§ÇÑ ±âÈ¹Àü ¿­·Á°í ÇÑ´Ù. È²±Ý°¡Áö ÃâÆÇ»ç¿¡¼­ ¹ßÇàÇÑ µµ¼­ Áß Àç°í ¼ö·® 10±Ç ¹Ì¸¸ÀÎ µµ¼­¸í°ú
---°¡°Ý, Àç°í»óÅÂ¸¦ Ç¥½ÃÇÏ´Â SQL ÀÛ¼º. Àç°í¼ö·® 5±Ç ¹Ì¸¸ µµ¼­´Â 'Ãß°¡ÁÖ¹®ÇÊ¿ä'·Î, ³ª¸ÓÁö´Â '¼Ò·®º¸À¯'·Î Ç¥½Ã.
---Àç°í¼ö·® ¸¹Àº ¼ø, µµ¼­¸í ¼øÀ¸·Î Ç¥½ÃµÇµµ·Ï ÇÑ´Ù.
+--17. ìš”ì¦˜ë“¤ì–´ ë‹¤ì‹œê¸ˆ ì¸ê¸°ë¥¼ ì–»ê³  ìžˆëŠ” 'í™©ê¸ˆê°€ì§€'ì¶œíŒì‚¬ë¥¼ ìœ„í•œ ê¸°íšì „ ì—´ë ¤ê³  í•œë‹¤. í™©ê¸ˆê°€ì§€ ì¶œíŒì‚¬ì—ì„œ ë°œí–‰í•œ ë„ì„œ ì¤‘ ìž¬ê³  ìˆ˜ëŸ‰ 10ê¶Œ ë¯¸ë§Œì¸ ë„ì„œëª…ê³¼
+--ê°€ê²©, ìž¬ê³ ìƒíƒœë¥¼ í‘œì‹œí•˜ëŠ” SQL ìž‘ì„±. ìž¬ê³ ìˆ˜ëŸ‰ 5ê¶Œ ë¯¸ë§Œ ë„ì„œëŠ” 'ì¶”ê°€ì£¼ë¬¸í•„ìš”'ë¡œ, ë‚˜ë¨¸ì§€ëŠ” 'ì†ŒëŸ‰ë³´ìœ 'ë¡œ í‘œì‹œ.
+--ìž¬ê³ ìˆ˜ëŸ‰ ë§Žì€ ìˆœ, ë„ì„œëª… ìˆœìœ¼ë¡œ í‘œì‹œë˜ë„ë¡ í•œë‹¤.
 SELECT BOOK_NM, 
         PRICE,
-        CASE WHEN STOCK_QTY<5 THEN 'Ãß°¡ÁÖ¹®ÇÊ¿ä'
-        ELSE '¼Ò·®º¸À¯' 
-        END AS Àç°í»óÅÂ
+        CASE WHEN STOCK_QTY<5 THEN 'ì¶”ê°€ì£¼ë¬¸í•„ìš”'
+        ELSE 'ì†ŒëŸ‰ë³´ìœ ' 
+        END AS ìž¬ê³ ìƒíƒœ
 FROM TB_BOOK
-WHERE PUBLISHER_NM LIKE ('È²±Ý°¡Áö%')AND
+WHERE PUBLISHER_NM LIKE ('í™©ê¸ˆê°€ì§€%')AND
         STOCK_QTY<10;
         
---18. '¾ÆÅ¸Æ®·Ñ' µµ¼­ ÀÛ°¡¿Í ¿ªÀÚ¸¦ Ç¥½ÃÇÏ´Â SQL±¸¹® ÀÛ¼ºÇÏ½Ã¿À. (Çì´õ µµ¼­¸í,ÀúÀÚ,¿ªÀÚ·Î)
-SELECT BOOK_NM µµ¼­¸í,
-        W1.WRITER_NM ÀúÀÚ,
-        W2.WRITER_NM ¿ªÀÚ
+--18. 'ì•„íƒ€íŠ¸ë¡¤' ë„ì„œ ìž‘ê°€ì™€ ì—­ìžë¥¼ í‘œì‹œí•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±í•˜ì‹œì˜¤. (í—¤ë” ë„ì„œëª…,ì €ìž,ì—­ìžë¡œ)
+SELECT BOOK_NM ë„ì„œëª…,
+        W1.WRITER_NM ì €ìž,
+        W2.WRITER_NM ì—­ìž
 FROM TB_BOOK
 JOIN TB_BOOK_AUTHOR A USING(BOOK_NO)
 JOIN TB_BOOK_TRANSLATOR T USING(BOOK_NO)
 JOIN TB_WRITER W1 ON(W1.WRITER_NO = A.WRITER_NO)
 JOIN TB_WRITER W2 ON(W2.WRITER_NO = T.WRITER_NO)
-WHERE BOOK_NM = '¾ÆÅ¸Æ®·Ñ';
---´Ù½ÃÇ®¾î¾ßÇÔ.
+WHERE BOOK_NM = 'ì•„íƒ€íŠ¸ë¡¤';
 
---19. ÇöÀç±âÁØÀ¸·Î ÃÖÃÊ¹ßÇàÀÏ·ÎºÎÅÍ ¸¸ 30³â °æ°úµÇ°í, Àç°í¼ö·®ÀÌ 90±Ç ÀÌ»óÀÎ µµ¼­¿¡ ´ëÇØ µµ¼­¸í, Àç°í¼ö·®, ¿ø·¡°¡°Ý, 20%ÀÎÇÏ°¡°Ý
---Ç¥½ÃÇÏ´Â SQL±¸¹® ÀÛ¼º. (°á°ú Çì´õ µµ¼­¸í, Àç°í¼ö·®, °¡°Ý(Org), °¡°Ý(New)·Î Ç¥½Ã
-SELECT BOOK_NM µµ¼­¸í,
-        STOCK_QTY Àç°í¼ö·®,
-        PRICE "°¡°Ý(Org)",
-        PRICE*0.8 "°¡°Ý(New)"
+
+--19. í˜„ìž¬ê¸°ì¤€ìœ¼ë¡œ ìµœì´ˆë°œí–‰ì¼ë¡œë¶€í„° ë§Œ 30ë…„ ê²½ê³¼ë˜ê³ , ìž¬ê³ ìˆ˜ëŸ‰ì´ 90ê¶Œ ì´ìƒì¸ ë„ì„œì— ëŒ€í•´ ë„ì„œëª…, ìž¬ê³ ìˆ˜ëŸ‰, ì›ëž˜ê°€ê²©, 20%ì¸í•˜ê°€ê²©
+--í‘œì‹œí•˜ëŠ” SQLêµ¬ë¬¸ ìž‘ì„±. (ê²°ê³¼ í—¤ë” ë„ì„œëª…, ìž¬ê³ ìˆ˜ëŸ‰, ê°€ê²©(Org), ê°€ê²©(New)ë¡œ í‘œì‹œ
+SELECT BOOK_NM ë„ì„œëª…,
+        STOCK_QTY ìž¬ê³ ìˆ˜ëŸ‰,
+        PRICE "ê°€ê²©(Org)",
+        PRICE*0.8 "ê°€ê²©(New)"
 FROM TB_BOOK
 WHERE (SYSDATE-ISSUE_DATE) > 10950 AND
     STOCK_QTY >90;
