@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체실습문제1</title>
+    <style>
+        body{
+            background-color:darkgreen;
+        }
+        legend{
+            color:tomato;
+        }
+        pre{
+            font-weight: bold;
+        }
+        fieldset{
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>객체 실습 문제</h1>
+    <pre>
+
+문제1.
+다음 입력 버튼을 클릭하면 이름,나이,주소를 prompt로 입력받은 후
+입력 받은 정보를 member객체에 저장하고,
+이후 출력 버튼을 클릭하면 member객체 안에있는 정보를
+출력 창에 출력되도록 만들자
+(단, 입력을 받지 않은 상태에서 출력버튼 클릭하면 입력 해달라고 알리자)
+ex)이름 : ~~~
+    나이 : ~~세
+    주소 : ~~~ ~~~ ~~~...
+    </pre>
+    <fieldset id="print">
+        <legend>출력창</legend>
+    </fieldset><br>
+    <button onclick="input();" id="input">입력</button>
+    <button onclick="output();" id="output">출력</button>
+
+    <script>
+        let info = {
+            name:null,
+            age:null,
+            address:null
+        };
+
+        function input(){
+            info.name = prompt("이름 입력 : ");
+            info.age = prompt("나이 입력 : ");
+            info.address = prompt("주소 입력 : ");
+        }
+
+        function output(){
+            if(info.name==null&&info.age==null&&info.address==null){
+                alert("입력을 먼저 해주세요");
+                return;
+            };
+            let print = document.getElementById("print");
+            print.innerHTML = "이름 : "+info.name+"<br>"+
+                                "나이 : "+info.age+"세"+"<br>"+
+                                "주소 : "+info.address;
+        }
+    </script>
+</body>
+</html>
