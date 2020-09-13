@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 실습문제3</title>
+    <style>
+        div{
+            border:1px solid tomato;
+            height:30px;
+        }
+    </style>
+    <script>
+        var str = [];
+
+        function push(){
+            input = document.getElementById("input").value;
+            str.push(input);
+        }
+
+        function print(){
+        console.log(str);
+            var result = document.getElementById("result");
+            result.innerText=str.toString();
+        }
+    </script>
+</head>
+<body>
+    <h1>배열 실습 문제3</h1>
+    <p>문자열을 여러 개 입력 받은 후 출력 버튼 클릭시 입력했던 모든 문자열이 출력되도록 만들자<br>
+    예) 개구리 -> 입력, 바나나 -> 입력, 복숭아 -> 입력<br>
+    출력 : 개구리,바나나,복숭아</p>
+        <!-- <form> -->
+            <fieldset>
+                <legend>입력</legend>
+                <input type="text" id="input"><button onclick="push();">입력</button>
+            </fieldset>
+            <br>
+        <!-- </form> -->
+        <div id="result"></div>
+        <button onclick="print();" id="result">출력</button>
+</body>
+</html>
